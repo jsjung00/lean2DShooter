@@ -1,3 +1,4 @@
+var cnv;
 var player;
 var enemies = [];
 let bullets = [];
@@ -7,12 +8,19 @@ var enemiesBodyCount = 0;
 const MIN_ENEMIES = 2;
 let playerShotSound;
 let enemyShotSound;
+function centerCanvas() {
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
+}
 function setup() {
+  cnv = createCanvas(1000, 1000);
+  centerCanvas();
   playerShotSound = loadSound("assets/ak47_01.mp3");
   playerShotSound.setVolume(0.1);
   enemyShotSound = loadSound("assets/ots38_01.mp3");
   enemyShotSound.setVolume(0.07);
-  createCanvas(1000, 1000);
+
   player = new Player(width / 2, height / 2);
   rectMode(CENTER);
   //create enemies
@@ -138,4 +146,8 @@ function bulletHitBody(bullet, body) {
     body_ys[0] < bullet.pos.y &&
     bullet.pos.y < body_ys[1]
   );
+}
+
+function windowResized() {
+  centerCanvas();
 }
