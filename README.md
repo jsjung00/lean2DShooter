@@ -11,4 +11,6 @@ WASD to move and click to fire.
 <img src="./gameplay.gif" width="500">
 </p>
 
+## Demo Link
+Play it here: https://jsjung00.github.io/lean2DShooter/
 
