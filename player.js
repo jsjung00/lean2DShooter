@@ -1,5 +1,6 @@
 class Player {
   constructor(x, y) {
+    this.maxHealth = 100;
     this.health = 100;
     this.pos = createVector(x, y);
     this.rad = 50;
@@ -23,6 +24,22 @@ class Player {
     fill(255);
     rect(0, 0, 10, 50);
     pop();
+    //draw health bar
+    push();
+    translate(0, -this.rad + 10);
+    stroke(0);
+    noFill();
+    rect(this.pos.x, this.pos.y, this.rad, 10);
+    fill(color(255, 99, 71));
+    rectMode(CORNER);
+    rect(
+      this.pos.x - this.rad / 2,
+      this.pos.y - 5,
+      max(0, this.rad * (this.health / this.maxHealth)),
+      10
+    );
+    rectMode(CENTER);
+    pop();
   }
   //takes in string "N", "E", "S", "W" to determine direction to move
   move(dir) {
@@ -39,6 +56,14 @@ class Player {
       case "W":
         this.pos.add(-this.speed, 0);
         break;
+    }
+  }
+  hit() {
+    this.health -= 1.5;
+  }
+  regenerate() {
+    if (this.health < this.maxHealth) {
+      this.health += 0.05;
     }
   }
 }
